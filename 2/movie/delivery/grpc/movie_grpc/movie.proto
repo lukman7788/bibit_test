@@ -1,0 +1,50 @@
+syntax="proto3";
+package movie_grpc;
+
+service MovieHandler {
+  rpc GetByID (MovieRequest) returns (MovieData);
+  rpc Search (SearchRequest) returns (SearchData);
+}
+
+message MovieRequest{
+  string ImdbID = 1;
+}
+
+message SearchRequest{
+  int64 pagination = 1;
+  string searchword = 2;
+}
+
+message SearchData{
+  repeated ShortMovie Search = 1;
+  string totalResult = 2;
+  string Response = 3;
+}
+
+message ShortMovie{
+  string ImdbID = 1;
+  string Title = 2;
+  string Year = 3;
+  string Type = 4;
+}
+
+message MovieData{
+  string ImdbID = 1;
+  string Title = 2;
+  string Year = 3;
+  string Type = 4;
+  string Poster = 5;
+  string Rated = 6;
+  string Released = 7;
+  string Runtime = 8;
+  string Genre = 9;
+  string Director = 10;
+  string Writer = 11;
+  string Actors = 12;
+  repeated Rating Ratings = 13;
+}
+
+message Rating{
+  string Source = 1;
+  string Value = 2;
+}
